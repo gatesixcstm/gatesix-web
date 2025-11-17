@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gatesix — Portfolio & Production</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0b0c0e;
+        --card: #101215;
+        --muted: #9aa3b2;
+        --radius: 18px;
+        --outline: 1px solid rgba(255, 255, 255, 0.06);
+        --grad: linear-gradient(135deg, #7c3aed, #06b6d4);
+        --grad2: linear-gradient(135deg, #ef4444, #f97316);
+        font-family: "Inter", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: #e6eef6;
+        overflow-x: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 18px 40px;
+        backdrop-filter: blur(12px);
+        background: rgba(0, 0, 0, 0.35);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .logo {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #111827, #0b1220);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.06);
+      }
+      nav {
+        display: flex;
+        gap: 26px;
+        font-size: 15px;
+      }
+      nav a {
+        opacity: 0.8;
+        font-weight: 600;
+        transition: 0.25s;
+      }
+      nav a:hover {
+        opacity: 1;
+        color: #ffffff;
+      }
+
+      /* HERO PARALLAX */
+      .hero {
+        height: 95vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 40px;
+        margin-top: 70px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?auto=format&fit=crop&w=1300")
+          center/cover;
+        opacity: 0.18;
+        transform: scale(1.3);
+      }
+      .hero h1 {
+        font-size: 50px;
+        max-width: 700px;
+        font-weight: 800;
+        line-height: 1.06;
+      }
+      .hero p {
+        color: #b8c1cc;
+        max-width: 580px;
+        margin-top: 12px;
+        font-size: 17px;
+      }
+      .cta-row {
+        margin-top: 26px;
+        display: flex;
+        gap: 14px;
+      }
+      .btn {
+        padding: 14px 20px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+      .btn-primary {
+        background: var(--grad);
+        color: white;
+      }
+      .btn-primary:hover {
+        filter: brightness(1.12);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      /* SECTION WRAPPER */
+      .section {
+        padding: 90px 40px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .title {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .subtitle {
+        color: var(--muted);
+        max-width: 600px;
+        margin-bottom: 36px;
+      }
+
+      /* FEATURE GRID */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+      }
+      .feature {
+        padding: 24px;
+        border-radius: 16px;
+        background: var(--card);
+        border: var(--outline);
+        transition: 0.3s;
+        border-left: 4px solid transparent;
+      }
+      .feature:hover {
+        transform: translateY(-4px);
+        border-left: 4px solid #7c3aed;
+      }
+      .feature h3 {
+        margin-bottom: 6px;
+        font-size: 20px;
+      }
+
+      /* PORTFOLIO GRID */
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+      }
+      .port-item {
+        height: 220px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        border: var(--outline);
+        cursor: pointer;
+        transition: 0.35s;
+      }
+      .port-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.4s;
+      }
+      .port-item:hover img {
+        transform: scale(1.08);
+      }
+      .port-item::after {
+        content: "Lihat Detail";
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.4);
+        font-size: 13px;
+        opacity: 0;
+        transition: 0.35s;
+      }
+      .port-item:hover::after {
+        opacity: 1;
+      }
+
+      /* SOCIAL BAR */
+      .social-bar {
+        margin-top: 40px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .social-btn {
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        background: linear-gradient(135deg, #1f2937, #0f172a);
+        border: var(--outline);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.25s;
+      }
+      .social-btn:hover {
+        transform: translateY(-4px);
+        filter: brightness(1.12);
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 60px;
+        padding: 50px 40px;
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      @media (max-width: 720px) {
+        .hero h1 {
+          font-size: 36px;
+        }
+        header {
+          padding: 14px 20px;
+        }
+        .section {
+          padding: 60px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="brand">
+        <div class="logo">GS</div>
+        <div>
+          <strong style="font-size: 17px">Gatesix</strong>
+          <div style="font-size: 13px; color: var(--muted)">
+            Printing • Clothing Production
+          </div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">Tentang</a>
+        <a href="#services">Layanan</a>
+        <a href="#portfolio">Portofolio</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" id="hero-bg"></div>
+      <h1>
+        Membantu Brand & Bisnismu Tampil Profesional dengan Produksi Kelas
+        Premium
+      </h1>
+      <p>
+        Cetak kaos, hoodie, totebag, merchandise, bordir, sablon, dan banyak
+        lagi — Gatesix hadir untuk produk yang rapi, kuat, dan siap jual.
+      </p>
+
+      <div class="cta-row">
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/62881026546159"
+          target="_blank"
+          >Chat Sekarang</a
+        >
+        <a class="btn btn-outline" href="#portfolio">Lihat Portofolio</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="title">Tentang Gatesix</div>
+      <div class="subtitle">
+        Gatesix adalah studio printing & clothing production yang fokus pada
+        kualitas, detail, dan kerapian. Kami mendukung UMKM, brand fashion,
+        komunitas, dan perusahaan.
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Kualitas Premium</h3>
+          <p class="muted">
+            Setiap produk melewati proses QC untuk memastikan hasil maksimal.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Harga Fair</h3>
+          <p class="muted">Harga transparan dan dapat disesuaikan kebutuhan.</p>
+        </div>
+        <div class="feature">
+          <h3>Tepat Waktu</h3>
+          <p class="muted">Produksi cepat dengan estimasi yang jelas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="title">Layanan Produksi</div>
+      <div class="subtitle">
+        Mulai dari sablon hingga produksi massal, semuanya dilakukan dengan rapi
+        & presisi.
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Sablon / DTG</h3>
+          <p class="muted">
+            Sablon plastisol, rubber, DTG untuk warna yang tajam.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Bordir</h3>
+          <p class="muted">
+            Bordir komputer rapi untuk hoodie, topi, kaos dan seragam.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Produksi Massal</h3>
+          <p class="muted">Dari belasan hingga ribuan pcs.</p>
+        </div>
+        <div class="feature">
+          <h3>Custom Merchandise</h3>
+          <p class="muted">Totebag, lanyard, gantungan, dan lainnya.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="section" id="portfolio">
+      <div class="title">Portofolio</div>
+      <div class="subtitle">Beberapa hasil produksi Gatesix.</div>
+
+      <div class="portfolio-grid">
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800"
+          />
+        </div>
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"
+          />
+        </div>
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1584467735871-5f4a1f0b42c3?w=800"
+          />
+        </div>
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=800"
+          />
+        </div>
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800"
+          />
+        </div>
+        <div class="port-item">
+          <img
+            src="https://images.unsplash.com/photo-1620794085650-13cf82e39f48?w=800"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="title">Hubungi Kami</div>
+      <div class="subtitle">Klik salah satu platform berikut:</div>
+
+      <div class="social-bar">
+        <a
+          class="social-btn"
+          href="https://wa.me/62881026546159"
+          target="_blank"
+          >WhatsApp</a
+        >
+        <a
+          class="social-btn"
+          href="https://shopee.co.id/gatesix_"
+          target="_blank"
+          >Shopee</a
+        >
+        <a
+          class="social-btn"
+          href="https://www.tiktok.com/@gatesix_"
+          target="_blank"
+          >TikTok</a
+        >
+        <a
+          class="social-btn"
+          href="https://www.instagram.com/gatesix_"
+          target="_blank"
+          >Instagram</a
+        >
+      </div>
+    </section>
+
+    <footer>© 2025 Gatesix. All rights reserved.</footer>
+
+    <script>
+      // Parallax Hero Background
+      document.addEventListener("mousemove", (e) => {
+        const bg = document.getElementById("hero-bg");
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        bg.style.transform = `scale(1.3) translate(${-x}px, ${-y}px)`;
+      });
+    </script>
+  </body>
+</html>
