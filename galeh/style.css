@@ -1,0 +1,882 @@
+/*  WEB GATESIX BY SITOTES 2025  */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap');
+
+/*
+  ========================================
+  ROOT VARIABLES BY SITOTES 2025
+  ========================================
+*/
+:root {
+  --bg-dark: #0D0D0D; /* Slightly darker background */
+  --bg-light: #1A1A1A; /* Darker cards */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A8A8A8;
+  
+  --gradient-start: #00A6F3; /* Brighter blue */
+  --gradient-end: #F80088;   /* Hot pink */
+
+  --accent-color: var(--gradient-end);
+
+  --font-header: 'Montserrat', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+
+  --shadow-light: 0 5px 20px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-dark: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+/*
+  ========================================
+  BASE & RESET STYLES BY SITOTES 2025
+  ========================================
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: repeating-linear-gradient(0deg, #111 0px, #111 1px, transparent 1px, transparent 100%), repeating-linear-gradient(90deg, #111 0px, #111 1px, transparent 1px, transparent 100%);
+  background-size: 15px 15px;
+  background-attachment: fixed; /* Keep pattern fixed while scrolling */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for images */
+}
+
+.container {
+  padding: 100px; /* Increased padding for more space */
+}
+
+/*
+  ========================================
+  NAVIGATION BY SITOTES 2025
+  ========================================
+*/
+.main-nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 15px 0;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.main-nav .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-nav .logo {
+  font-family: var(--font-header);
+  font-weight: 900;
+  font-size: 2.2rem; /* Slightly larger */
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(0, 166, 243, 0.5); /* Subtle glow */
+}
+
+.main-nav .nav-links {
+  display: flex;
+  gap: 40px; /* Increased gap for better spacing on desktop */
+  list-style: none;
+}
+
+.main-nav .nav-links a {
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 8px;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  transition: all 0.3s ease; /* Added transition for smoother effects */
+}
+
+.main-nav .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%; /* Start from center */
+  transform: translateX(-50%); /* Center the underline */
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation */
+}
+
+.main-nav .nav-links a:hover {
+  color: var(--text-primary);
+  transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+}
+
+.main-nav .nav-links a:hover::after,
+.main-nav .nav-links a.active::after { /* Added .active class */
+  width: 100%;
+}
+
+.nav-scrolled {
+  background: rgba(13, 13, 13, 0.85); /* Darker, more translucent */
+  backdrop-filter: blur(12px); /* Stronger blur for glassmorphism */
+  box-shadow: var(--shadow-medium);
+}
+
+.menu-toggle {
+  display: none; /* Hamburger menu is hidden by default now */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-primary);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Transform hamburger to cross */
+.menu-toggle.open .bar:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open .bar:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/*
+  ========================================
+  HERO HEADER BY SITOTES 2025
+  ========================================
+*/
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 125%; /* Slightly larger to prevent empty space during parallax */
+  object-fit: cover;
+  filter: blur(5px) brightness(0.6);
+  z-index: -2;
+  /* will-change improves performance for transform animations */
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.6));
+  z-index: -1;
+}
+
+.hero h1 {
+  font-size: 5.5rem; /* Slightly larger on desktop */
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, var(--gradient-start), #ffffff, var(--gradient-end));
+  background-size: 200% auto; /* For animation */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientFlow 3s linear infinite, fadeInDown 1s ease-out; /* Combined animations */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.4); /* Stronger glow */
+}
+
+.hero .subtitle {
+  font-size: 1.6rem; /* Slightly larger on desktop */
+  font-weight: 400;
+  letter-spacing: 3px; /* Wider spacing */
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  animation: fadeInUp 1s ease-out 0.5s;
+  animation-fill-mode: both;
+  height: 2rem; /* Reserve space for typed text to prevent layout shift */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Add subtle shadow for contrast */
+}
+
+.hero-cta-btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 35px;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  border-radius: 50px;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 166, 243, 0.6);
+}
+
+.hero-cta-btn:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 5px 20px rgba(0, 166, 243, 0.4);
+}
+
+
+/*
+  ========================================
+  SECTIONS GENERAL BY SITOTES 2025
+  ========================================
+*/
+#services {
+  background-color: var(--bg-light);
+}
+
+.section-title {
+  font-size: 3.5rem; /* Larger section titles */
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1.25rem; /* Slightly larger subtitle */
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+}
+
+.section-divider {
+  width: 80%;
+  max-width: 800px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gradient-end), var(--gradient-start), transparent);
+  margin: 80px auto;
+  opacity: 0;
+  transform: scaleX(0); /* Start scaled down horizontally */
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Smoother and longer transition */
+}
+
+.section-divider.is-visible {
+  opacity: 1;
+  transform: scaleX(1); /* Scale up to full width */
+  background: linear-gradient(90deg, transparent, var(--gradient-start), var(--gradient-end), transparent);
+}
+
+
+/*
+  ========================================
+  FEATURES & PORTFOLIO GRIDS BY SITOTES 2025
+  ========================================
+*/
+.features-grid, .portfolio-grid, .catalog-items {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px; /* Increased gap */
+  margin-top: 50px;
+}
+
+.feature-card {
+  background: var(--bg-dark);
+  padding: 40px;
+  border-radius: 8px; /* Changed from 12px to 8px */
+  text-align: center;
+  border: 1px solid transparent;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-12px) scale(1.03) rotate(-1deg); /* Added rotation */
+  border-color: var(--gradient-end);
+  box-shadow: 0 0 25px rgba(248, 0, 136, 0.5), 0 0 50px rgba(0, 166, 243, 0.3); /* Dual-color glow */
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card h3 {
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+}
+
+.portfolio-item {
+  border-radius: 8px; /* Changed from 10px to 8px */
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: var(--shadow-light);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-item img {
+  transition: transform 0.4s ease, filter 0.4s ease; /* Add filter transition */
+  filter: grayscale(100%); /* Make images grayscale by default */
+}
+
+.portfolio-item:hover {
+  transform: scale(1.04) rotate(1deg); /* Added rotation */
+  box-shadow: var(--shadow-dark);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.1);
+  filter: grayscale(0%); /* Remove grayscale on hover */
+}
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, transparent 80%);
+  display: flex;
+  align-items: flex-end;
+  padding: 30px;
+  opacity: 1; /* Always visible for a cleaner look */
+  transition: none; /* Removed transition */
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-overlay h3 {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  transform: translateY(0); /* Reset position */
+  transition: none;
+}
+
+.portfolio-item:hover .portfolio-overlay h3 {
+  transform: translateY(0);
+}
+
+/*
+  ========================================
+  ADVANTAGES GRID BY SITOTES 2025
+  ========================================
+*/
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.advantage-card {
+  background: var(--bg-dark);
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #333;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advantage-card:hover {
+  transform: translateY(-10px) scale(1.05); /* More lift and scale */
+  border-color: var(--gradient-start);
+  box-shadow: 0 0 25px rgba(0, 166, 243, 0.5), 0 0 50px rgba(248, 0, 136, 0.3); /* Dual-color glow */
+}
+
+.advantage-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--gradient-start);
+}
+
+.advantage-card h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.advantage-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/*
+  ========================================
+  KATALOG PAGE BY SITOTES 2025
+  ========================================
+*/
+.catalog-item {
+  background: var(--bg-light);
+  border-radius: 8px; /* Changed from 10px to 8px */
+  box-shadow: var(--shadow-light);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-item:hover {
+  transform: translateY(-12px) scale(1.05); /* More lift and scale */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 166, 243, 0.4); /* Deeper shadow with glow */
+}
+
+.catalog-item img {
+  border-bottom: 5px solid var(--gradient-end); /* Thicker border */
+  transition: border-color 0.3s ease;
+}
+
+.catalog-item:hover img {
+  border-color: var(--gradient-start); /* Change border color on hover */
+}
+
+.catalog-item-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-item h3 {
+  font-size: 1.6rem;
+  color: var(--text-primary);
+}
+
+.catalog-item p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 15px 0;
+  flex-grow: 1;
+}
+
+.catalog-item .price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gradient-start);
+  margin-top: auto;
+}
+
+/*
+  ========================================
+  FOOTER BY SITOTES 2025
+  ========================================
+*/
+.site-footer {
+  background-color: #0A0A0A;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.site-footer .footer-logo {
+  font-family: var(--font-header);
+  font-weight: 900;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.site-footer .footer-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.social-links a {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-5px) scale(1.1);
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.social-links a:active {
+  transform: translateY(-2px) scale(1.05);
+  transition: transform 0.1s ease;
+}
+
+.site-footer .copyright {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/*
+  ========================================
+  UTILITIES & ANIMATIONS BY SITOTES 2025
+  ========================================
+*/
+.floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: var(--text-primary);
+  padding: 15px 25px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-dark);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 999;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 15px 30px rgba(142, 45, 226, 0.4);
+}
+
+.floating-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 5px 15px rgba(142, 45, 226, 0.6);
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  left: 100px; /* Positioned slightly right of floating-btn */
+  background: var(--gradient-start);
+  color: var(--text-primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-medium);
+  z-index: 998; /* Below floating-btn */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out;
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 166, 243, 0.4);
+}
+
+.scroll-progress-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px; /* Height of the progress bar */
+  background-color: transparent; /* Background of the container */
+  z-index: 1001; /* Above navigation */
+}
+
+.scroll-progress-indicator .progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  transition: width 0.1s linear; /* Smooth width transition */
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(50px) scale(0.98); /* Start slightly smaller and lower */
+  transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* New staggered fade-in animation */
+.fade-in-up-staggered {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up-staggered.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-up-staggered.is-visible:nth-child(1) { transition-delay: 0s; }
+.fade-in-up-staggered.is-visible:nth-child(2) { transition-delay: 0.1s; }
+.fade-in-up-staggered.is-visible:nth-child(3) { transition-delay: 0.2s; }
+.fade-in-up-staggered.is-visible:nth-child(4) { transition-delay: 0.3s; }
+.fade-in-up-staggered.is-visible:nth-child(5) { transition-delay: 0.4s; }
+.fade-in-up-staggered.is-visible:nth-child(6) { transition-delay: 0.5s; }
+.fade-in-up-staggered.is-visible:nth-child(7) { transition-delay: 0.6s; }
+.fade-in-up-staggered.is-visible:nth-child(8) { transition-delay: 0.7s; }
+
+/* Custom Cursor */
+#custom-cursor {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--gradient-end);
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease-out, height 0.2s ease-out, border-color 0.2s ease-out;
+  z-index: 9999;
+  mix-blend-mode: difference; /* Makes it visible on any background */
+}
+
+#custom-cursor.grow {
+  width: 40px;
+  height: 40px;
+  border-color: var(--gradient-start);
+}
+
+/* Skeleton Loading for Images */
+.placeholder-image {
+  background-color: #333;
+  position: relative;
+  overflow: hidden;
+  /* Image itself is loaded on top of this placeholder */
+}
+
+.placeholder-image.loaded img {
+  opacity: 1; /* Show image when loaded */
+}
+
+.placeholder-image img {
+  opacity: 0; /* Hide image initially */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.placeholder-image.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textGradientFlow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+/*
+  ========================================
+  RESPONSIVE DESIGN BY SITOTES 2025
+  ========================================
+*/
+
+/* Tablet View */
+@media (max-width: 992px) {
+  .hero h1 { font-size: 4.5rem; }
+  .hero .subtitle { font-size: 1.4rem; }
+  .section-title { font-size: 3rem; }
+  
+  .main-nav .nav-links {
+    display: none; /* Hide nav links by default on smaller screens */
+  }
+
+  .main-nav .nav-container {
+    justify-content: space-between; /* Align logo and toggle */
+  }
+
+  .menu-toggle {
+    display: flex; /* Show hamburger menu */
+  }
+
+  /* When menu is open */
+  .main-nav.open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position below the nav bar */
+    left: 0;
+    width: 100%;
+    background: rgba(13, 13, 13, 0.95);
+    box-shadow: var(--shadow-medium);
+    padding: 20px 0;
+    gap: 10px;
+  }
+
+  .main-nav.open .nav-links a {
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .main-nav.open .nav-links a:hover {
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  .main-nav.open .nav-links a::after {
+    display: none; /* Hide underline in expanded menu */
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  #custom-cursor {
+    display: none !important; /* Hide custom cursor on mobile */
+  }
+  .container { padding: 80px 0; }
+
+  .hero { height: 80vh; }
+  .hero h1 { font-size: 3.5rem; }
+  .hero .subtitle { font-size: 1.2rem; }
+  
+  .section-title { font-size: 2.5rem; }
+  .section-subtitle { font-size: 1.1rem; }
+
+  /* Horizontal Scroll for Social Media Cards */
+  .advantages-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    /* Reset grid properties */
+    grid-template-columns: none; 
+  }
+
+  .advantages-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .advantage-card {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero { height: 45vh; }
+  .hero h1 { font-size: 2.8rem; letter-spacing: -1px; }
+  .hero .subtitle { font-size: 1rem; letter-spacing: 1px; }
+
+  .floating-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .site-footer .footer-logo { font-size: 2.2rem; }
+  .site-footer .footer-subtitle { font-size: 1rem; }
+  .social-links { gap: 20px; }
+  .social-links a { font-size: 1.8rem; }
+}
